@@ -31,9 +31,11 @@ int main() {
   BigInt<10> x(100);
   BigInt<10> y(20);
   BigInt<10>* ptry = &y;
-  BigInt<10> result = *x.add(ptry);
-  BigInt<10> result2 = *x.subtract(ptry);
+  BigInt<10>* ptr_result = x.add(ptry);
+  BigInt<10> result = *ptr_result;
   std::cout << result << std::endl;
+  BigInt<10>* ptr_result2 = x.subtract(ptry);
+  BigInt<10> result2 = *ptr_result2;
   std::cout << result2 << std::endl;
   return 0;
 }

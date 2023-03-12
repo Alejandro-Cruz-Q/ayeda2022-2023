@@ -840,6 +840,7 @@ BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
   }
   // We need control the sign of the result of the operands because the sign is
   // defined by the sign of the major operand
+
   if (number_x_aux.GetSign() != number_y_aux.GetSign()) {
     if (number_x_aux.GetSign() == -1) {
       BigInt<Base> result (number_y_aux - (-number_x_aux));
@@ -847,13 +848,12 @@ BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
       ptrResult = &result;
       return ptrResult;
     } else {
-      BigInt<Base> result (number_y_aux - (-number_x_aux));
+      BigInt<Base> result (number_x_aux - (-number_y_aux));
       BigInt<Base>* ptrResult;
       ptrResult = &result;
       return ptrResult;
     }
   }
-
   std::vector<char> digits_sum;
   for (size_t i = 0; i < number_x_aux.GetDigits().size(); i++) {
     int sum = number_x_aux[i] + number_y_aux[i] + carry;
@@ -863,8 +863,7 @@ BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
   if (carry != 0) {
     digits_sum.push_back(carry);
   }
-  BigInt<Base> result(digits_sum, number_x_aux.GetSign());
-  BigInt<Base>* ptrResult = &result;
+  BigInt<Base>* ptrResult = new BigInt<Base>(digits_sum, number_x_aux.GetSign());
   return ptrResult;
 }
 
@@ -888,7 +887,8 @@ BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
   // this situation always
 
   if (number_x_aux < number_y_aux) {
-    BigInt<Base> result(number_y_aux - number_x_aux).SetSign(-1);
+    BigInt<Base> result(number_y_aux - number_x_aux);
+    result.SetSign(-1);
     BigInt<Base>* ptrResult;
     ptrResult = &result;
     return ptrResult;
@@ -922,8 +922,7 @@ BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
     }
     digits_sub.push_back(sub);
   }
-  BigInt<Base> result(digits_sub, number_x_aux.GetSign());
-  BigInt<Base>* ptrResult = result;
+  BigInt<Base>* ptrResult = new BigInt<Base>(digits_sub, number_x_aux.GetSign());
   return ptrResult;
 }
 
