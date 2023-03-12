@@ -3,7 +3,7 @@
 // The class BigInt2 will be a template class specialized for the base 2
 
 #ifndef BIGINT2_H
-#define   
+#define BIGINT2_H
 // we need to include the class BigInt to use it as a base class
 
 #include <algorithm>
