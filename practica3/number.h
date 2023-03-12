@@ -21,7 +21,4 @@ class Number{
     friend std::istream& operator>>(std::istream&, Number&);
     //instiantation 
     static Number* create(size_t base, const string& s);
-  protected:
-    std::vector<char> digits_;
-    char sign_;
 };

@@ -818,3 +818,9 @@ template <size_t Base>
   BigInt<2> aux(result);
   return aux;
  }
+
+static BigInt<Base>* create(size_t base, const string& s){
+  new BigInt<base>(s) numero;
+  BigInt<Base>* puntero -> numero;
+  return numero;
+}

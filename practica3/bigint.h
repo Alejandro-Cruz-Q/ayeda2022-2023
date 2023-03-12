@@ -84,6 +84,8 @@ class BigInt {
 
   BigInt<Base> operator!() const;
 
+  static BigInt<Base>* create(size_t base, const string& s);
+
  protected:
   std::vector<char> digits_;
   int sign_;  // 1: positive, -1: negative
