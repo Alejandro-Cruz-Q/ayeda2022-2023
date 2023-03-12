@@ -819,8 +819,118 @@ template <size_t Base>
   return aux;
  }
 
-static BigInt<Base>* create(size_t base, const string& s){
-  new BigInt<base>(s) numero;
-  BigInt<Base>* puntero -> numero;
-  return numero;
+template <size_t Base>
+BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
+  BigInt<Base> number_x = *ptrNumber_x;
+  int carry = 0;
+  size_t number_digit_different = abs(number_x.GetDigits().size() - this->GetDigits().size());
+  BigInt<Base> number_y_aux;
+  BigInt<Base> number_x_aux;
+  if (number_x.GetDigits().size() > this->GetDigits().size()) {
+    number_y_aux = this->fill_zeros(number_digit_different);
+    number_x_aux = number_x;
+  } else if (number_x.GetDigits().size() < this->GetDigits().size()) {
+    number_x_aux = number_x.fill_zeros(number_digit_different);
+    number_y_aux.SetDigits(this->GetDigits());
+    number_y_aux.SetSign(this->GetSign());
+  } else {
+    number_x_aux = number_x;
+    number_y_aux.SetDigits(this->GetDigits());
+    number_y_aux.SetSign(this->GetSign());
+  }
+  // We need control the sign of the result of the operands because the sign is
+  // defined by the sign of the major operand
+  if (number_x_aux.GetSign() != number_y_aux.GetSign()) {
+    if (number_x_aux.GetSign() == -1) {
+      BigInt<Base> result (number_y_aux - (-number_x_aux));
+      BigInt<Base>* ptrResult;
+      ptrResult = &result;
+      return ptrResult;
+    } else {
+      BigInt<Base> result (number_y_aux - (-number_x_aux));
+      BigInt<Base>* ptrResult;
+      ptrResult = &result;
+      return ptrResult;
+    }
+  }
+
+  std::vector<char> digits_sum;
+  for (size_t i = 0; i < number_x_aux.GetDigits().size(); i++) {
+    int sum = number_x_aux[i] + number_y_aux[i] + carry;
+    digits_sum.push_back(sum % Base);
+    carry = sum / Base;
+  }
+  if (carry != 0) {
+    digits_sum.push_back(carry);
+  }
+  BigInt<Base> result(digits_sum, number_x_aux.GetSign());
+  BigInt<Base>* ptrResult = &result;
+  return ptrResult;
 }
+
+template <size_t Base>
+BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
+  BigInt<Base> number_y = *ptrNumber_y;
+  size_t number_digit_different = abs(this->GetDigits().size() - number_y.GetDigits().size());
+  BigInt<Base> number_y_aux;
+  BigInt<Base> number_x_aux;
+  if (this->GetDigits().size() > number_y.GetDigits().size()) {
+    number_y_aux = number_y.fill_zeros(number_digit_different);
+    number_x_aux = *this;
+  } else if (this->GetDigits().size() < number_y.GetDigits().size()) {
+    number_x_aux = this->fill_zeros(number_digit_different);
+    number_y_aux = number_y;
+  } else {
+    number_x_aux = *this;
+    number_y_aux = number_y;
+  }
+  // Only for positive numbers and number_x_aux > number_y_aux we can control
+  // this situation always
+
+  if (number_x_aux < number_y_aux) {
+    BigInt<Base> result(number_y_aux - number_x_aux).SetSign(-1);
+    BigInt<Base>* ptrResult;
+    ptrResult = &result;
+    return ptrResult;
+  }
+  if (number_x_aux.GetSign() == 1 && number_y_aux.GetSign() == -1) {
+    BigInt<Base> result(number_x_aux + (-number_y_aux));
+    BigInt<Base>* ptrResult;
+    ptrResult = &result;
+    return ptrResult;
+  } else if (number_x_aux.GetSign() == -1 && number_y_aux.GetSign() == 1) {
+    BigInt<Base> result((-number_x_aux) + number_y_aux);
+    BigInt<Base>* ptrResult;
+    ptrResult = &result;
+    return ptrResult;
+  } else if (number_x_aux.GetSign() == -1 && number_y_aux.GetSign() == -1) {
+    BigInt<Base> result(number_x_aux + (-number_y_aux));
+    BigInt<Base>* ptrResult;
+    ptrResult = &result;
+    return ptrResult;
+  }
+
+  std::vector<char> digits_sub;
+  int carry = 0;
+  for (size_t i = 0; i < number_x_aux.size(); i++) {
+    int sub = number_x_aux[i] - number_y_aux[i] - carry;
+    if (sub < 0) {
+      sub += Base;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    digits_sub.push_back(sub);
+  }
+  BigInt<Base> result(digits_sub, number_x_aux.GetSign());
+  BigInt<Base>* ptrResult = result;
+  return ptrResult;
+}
+
+// template <size_t Base>
+// static BigInt<Base>* create(size_t base, const std::string& s) override{
+//   new BigInt<base>(s) numero;
+//   BigInt<base>* puntero;
+//   puntero -> numero;
+//   return numero;
+// }

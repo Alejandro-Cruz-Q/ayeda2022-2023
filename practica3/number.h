@@ -20,5 +20,5 @@ class Number{
     friend std::ostream& operator<<(std::ostream&, const Number&);
     friend std::istream& operator>>(std::istream&, Number&);
     //instiantation 
-    static Number* create(size_t base, const string& s);
+    static Number* create(size_t base, const std::string& s);
 };

@@ -84,7 +84,12 @@ class BigInt {
 
   BigInt<Base> operator!() const;
 
-  static BigInt<Base>* create(size_t base, const string& s);
+  //practica 3
+  BigInt<Base>* add(const BigInt<Base>*);
+  BigInt<Base>* subtract(const BigInt<Base>*);
+
+
+  //static BigInt<Base>* create(size_t base, const std::string& s) override;
 
  protected:
   std::vector<char> digits_;
