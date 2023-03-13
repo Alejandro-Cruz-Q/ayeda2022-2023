@@ -641,7 +641,6 @@ BigInt<Base> BigInt<Base>::operator*(const BigInt<Base> &number_y) const {
         product.pop_back();
       int sign = (this->GetSign() == number_y.GetSign()) ? 1 : -1;
     return BigInt(product, sign);
-
 }
 
 /**
@@ -925,6 +924,35 @@ BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
   BigInt<Base>* ptrResult = new BigInt<Base>(digits_sub, number_x_aux.GetSign());
   return ptrResult;
 }
+
+template <size_t Base>
+BigInt<Base>* multiply(const BigInt<Base>* ptrNumber_y){
+  BigInt<Base> number_y = *ptrNumber_y;
+  size_t n = this->GetDigits().size();
+  size_t m = number_y.GetDigits().size();
+    std::vector<char> product(n + m, 0);
+
+  if(this->IsZero() || number_y.IsZero()){
+    BigInt<Base> zero;
+    return zero;
+  }
+    for (size_t i = 0; i < n; i++) {
+        int carry = 0;
+        for (size_t j = 0; j < m; j++) {
+            int tmp = digits_[i] * number_y.digits_[j] + product[i + j] + carry;
+            carry = tmp / Base;
+            product[i + j] = (tmp % Base) ;
+        }
+        product[i + m] = (carry) ;
+    }   
+    while (product.size() > 1 && product.back() == 0)
+        product.pop_back();
+      int sign = (this->GetSign() == number_y.GetSign()) ? 1 : -1;
+      BigInt<Base>* ptrResult = new BigInt<Base>(product, sign);
+    return BigInt(product, sign);
+}
+
+
 
 // template <size_t Base>
 // static BigInt<Base>* create(size_t base, const std::string& s) override{

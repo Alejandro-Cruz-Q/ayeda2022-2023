@@ -87,7 +87,7 @@ class BigInt {
   //practica 3
   BigInt<Base>* add(const BigInt<Base>*);
   BigInt<Base>* subtract(const BigInt<Base>*);
-
+  BigInt<Base>* multiply(const BigInt<Base>*);
 
   //static BigInt<Base>* create(size_t base, const std::string& s) override;
 
