@@ -1,7 +1,5 @@
 #include "bigint.h"
-#include <iostream>
-#include <string>
-#include <vector>
+
 /**
  * @brief Construct a new Big Int< Base>:: Big Int object
  *
@@ -793,7 +791,7 @@ BigInt<Base> BigInt<Base>::operator!() const{
  *
  */
 template <size_t Base>
- BigInt<Base>::operator BigInt<2>(){
+BigInt<Base>::operator BigInt<2>() const{
   BigInt<Base> number_aux = this->Abs();
   BigInt<Base> zero;
   BigInt<Base> two(2);
@@ -818,40 +816,40 @@ template <size_t Base>
   return aux;
  }
 
-template <size_t Base>
-BigInt<Base>::operator BigInt<8>() {
-    std::string octal;
-    BigInt<Base> num = *this;
-    while(!num.IsZero()){
-      auto result = num/BigInt<Base>("8");
-      octal += static_cast<char>('0' + result.GetDigits().back());
-      num = result;
-    }
-    if(sign_ == -1) {
-      octal += '-';
-    }
-    std::reverse(octal.begin(), octal.end());
-    return BigInt<8>(octal);
-}
+// template <size_t Base>
+// BigInt<Base>::operator BigInt<8>() {
+//     std::string octal;
+//     BigInt<Base> num = *this;
+//     while(!num.IsZero()){
+//       auto result = num/BigInt<Base>("8");
+//       octal += static_cast<char>('0' + result.GetDigits().back());
+//       num = result;
+//     }
+//     if(sign_ == -1) {
+//       octal += '-';
+//     }
+//     std::reverse(octal.begin(), octal.end());
+//     return BigInt<8>(octal);
+// }
+
+// template <size_t Base>
+// BigInt<Base>::operator BigInt<10>() {
+//     std::string dec;
+//     BigInt<Base> num = *this;
+//     while(!num.IsZero()){
+//       auto result = num/BigInt<Base>("10");
+//       dec += static_cast<char>('0' + result.GetDigits().back());
+//       num = result;
+//     }
+//     if(sign_ == -1) {
+//       dec += '-';
+//     }
+//     std::reverse(dec.begin(), dec.end());
+//     return BigInt<10>(dec);
+// }
 
 template <size_t Base>
-BigInt<Base>::operator BigInt<10>() {
-    std::string dec;
-    BigInt<Base> num = *this;
-    while(!num.IsZero()){
-      auto result = num/BigInt<Base>("10");
-      dec += static_cast<char>('0' + result.GetDigits().back());
-      num = result;
-    }
-    if(sign_ == -1) {
-      dec += '-';
-    }
-    std::reverse(dec.begin(), dec.end());
-    return BigInt<10>(dec);
-}
-
-template <size_t Base>
-BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
+BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) const {
   BigInt<Base> number_x = *ptrNumber_x;
   int carry = 0;
   size_t number_digit_different = abs(number_x.GetDigits().size() - this->GetDigits().size());
@@ -899,7 +897,7 @@ BigInt<Base>* BigInt<Base>::add(const BigInt<Base>* ptrNumber_x) {
 }
 
 template <size_t Base>
-BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
+BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) const{
   BigInt<Base> number_y = *ptrNumber_y;
   size_t number_digit_different = abs(this->GetDigits().size() - number_y.GetDigits().size());
   BigInt<Base> number_y_aux;
@@ -958,7 +956,7 @@ BigInt<Base>* BigInt<Base>::subtract(const BigInt<Base>* ptrNumber_y) {
 }
 
 template <size_t Base>
-BigInt<Base>* BigInt<Base>::multiply(const BigInt<Base>* ptrNumber_y){
+BigInt<Base>* BigInt<Base>::multiply(const BigInt<Base>* ptrNumber_y) const{
   BigInt<Base> number_y = *ptrNumber_y;
   size_t n = this->GetDigits().size();
   size_t m = number_y.GetDigits().size();
@@ -985,7 +983,7 @@ BigInt<Base>* BigInt<Base>::multiply(const BigInt<Base>* ptrNumber_y){
 }
 
 template <size_t Base>
-BigInt<Base>* BigInt<Base>::divide(const BigInt<Base>* ptrNumber_y){
+BigInt<Base>* BigInt<Base>::divide(const BigInt<Base>* ptrNumber_y) const{
   BigInt<Base> a = *this;
   BigInt<Base> b = *ptrNumber_y;
   if(b.IsZero()){
@@ -1029,14 +1027,14 @@ BigInt<Base>* BigInt<Base>::divide(const BigInt<Base>* ptrNumber_y){
 }
 
 template <size_t Base>
-BigInt<Base>* BigInt<Base>::module(const BigInt<Base>* ptrNumber_y){
+BigInt<Base>* BigInt<Base>::module(const BigInt<Base>* ptrNumber_y) const{
   BigInt<Base> number_y = *ptrNumber_y;
   BigInt<Base>* ptr = new BigInt<Base>(*this - (((*this / number_y).Abs()) * number_y));
   return ptr;
 }
 
 template <size_t Base>
-BigInt<Base>* BigInt<Base>::pon(const BigInt<Base>* ptrNumber_y){
+BigInt<Base>* BigInt<Base>::pon(const BigInt<Base>* ptrNumber_y) const{
   BigInt<Base> number_y = *ptrNumber_y;
   BigInt<Base>* ptr = new BigInt<Base> (*this^number_y);
   return ptr;

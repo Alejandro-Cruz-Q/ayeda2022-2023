@@ -3,7 +3,6 @@
 
 
 #include "bigint.h"
-#include "bigint2.h"
 
 int main() {
   // BigInt<10> y(1000000000);
@@ -35,21 +34,21 @@ int main() {
   // BigInt<10> result = *ptr_result;
   // std::cout << result << std::endl;
 
-  BigInt<2> a("0100");
-  BigInt<8> b("21");
-  BigInt<10> c(9);
+  // BigInt<2> a("0100");
+  // BigInt<8> b("21");
+  // BigInt<10> c(9);
 
-  BigInt<8> x(a);
-  BigInt<8> y(b);
-  BigInt<8> z(c);
-  std::cout << a << std::endl;
-  std::cout << x << std::endl;
-  std::cout << "\n";
-  std::cout << b << std::endl;
-  std::cout << y << std::endl;
-  std::cout << "\n";
-  std::cout << c << std::endl;
-  std::cout << z << std::endl;
+  // BigInt<8> x(a);
+  // BigInt<8> y(b);
+  // BigInt<8> z(c);
+  // std::cout << a << std::endl;
+  // std::cout << x << std::endl;
+  // std::cout << "\n";
+  // std::cout << b << std::endl;
+  // std::cout << y << std::endl;
+  // std::cout << "\n";
+  // std::cout << c << std::endl;
+  // std::cout << z << std::endl;
   
   return 0;
 }

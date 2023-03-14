@@ -6,9 +6,10 @@
 #include <string>
 #include <vector>
 #include <unistd.h>
+#include "number.h"
 
 template <size_t Base>
-class BigInt {
+class BigInt : public Number{
  public:
   // Constructor
   BigInt(long n = 0);
@@ -16,12 +17,6 @@ class BigInt {
   BigInt(const char *);
   BigInt(const BigInt<Base> &);
   BigInt(const std::vector<char> &,const int & );
-  // Conversion
-  explicit operator BigInt<2>();
-  explicit operator BigInt<8>();
-  explicit operator BigInt<10>();
-  
-
   // Asingment
   BigInt<Base> &operator=(const BigInt<Base> &);
 
@@ -87,12 +82,16 @@ class BigInt {
   BigInt<Base> operator!() const;
 
   //practica 3
-  BigInt<Base>* add(const BigInt<Base>*);
-  BigInt<Base>* subtract(const BigInt<Base>*);
-  BigInt<Base>* multiply(const BigInt<Base>*);
-  BigInt<Base>* divide(const BigInt<Base>*);
-  BigInt<Base>* module(const BigInt<Base>*);
-  BigInt<Base>* pon(const BigInt<Base>*);
+  BigInt<Base>* add(const BigInt<Base>*) const override;
+  BigInt<Base>* subtract(const BigInt<Base>*) const override;
+  BigInt<Base>* multiply(const BigInt<Base>*) const override;
+  BigInt<Base>* divide(const BigInt<Base>*) const override;
+  BigInt<Base>* module(const BigInt<Base>*) const override;
+  BigInt<Base>* pon(const BigInt<Base>*) const override;
+  // Conversion
+  operator BigInt<2>() const override;
+  //operator BigInt<8>() const override;
+  // operator BigInt<10>() const override;
 
   //static BigInt<Base>* create(size_t base, const std::string& s) override;
 
@@ -102,7 +101,7 @@ class BigInt {
 };
 
 #include "bigint2.h"
-#include "bigint.cc"
+// #include "bigint.cc"
 // we need to creat template specializations for the base 2
 
 #endif  // BIGINT_H
