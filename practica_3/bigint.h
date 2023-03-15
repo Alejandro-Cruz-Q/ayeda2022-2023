@@ -89,7 +89,7 @@ class BigInt : public Number{
   BigInt<Base>* module(const BigInt<Base>*) const override;
   BigInt<Base>* pon(const BigInt<Base>*) const override;
   // Conversion
-  operator BigInt<2>() const override;
+  explicit operator BigInt<2>() const;
   //operator BigInt<8>() const override;
   // operator BigInt<10>() const override;
 
@@ -101,7 +101,7 @@ class BigInt : public Number{
 };
 
 #include "bigint2.h"
-// #include "bigint.cc"
+#include "bigint.cc"
 // we need to creat template specializations for the base 2
 
 #endif  // BIGINT_H

@@ -1,5 +1,8 @@
 #include "bigint.h"
 
+#ifndef NUMBER_H
+#define NUMBER_H
+
 class Number{
   public:
     //aritmetic operations
@@ -22,3 +25,4 @@ class Number{
     // //instiantation 
     // static Number* create(size_t base, const std::string& s);
 };
+#endif  // NUMBER_H

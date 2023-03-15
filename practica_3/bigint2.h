@@ -24,7 +24,7 @@ class BigInt<2> {
 
   // Conversion
   template <size_t base>
- explicit operator BigInt<base>() const;
+  explicit operator BigInt<base>() const;
 
   // Getters and Setters
   std::vector<bool> GetDigits() const;
