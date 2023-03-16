@@ -1,8 +1,8 @@
-#include "bigint.h"
-
 #ifndef NUMBER_H
 #define NUMBER_H
 
+template<size_t Base>
+class BigInt;
 class Number{
   public:
     //aritmetic operations

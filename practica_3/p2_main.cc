@@ -38,9 +38,9 @@ int main() {
   // BigInt<8> b("21");
   // BigInt<10> c(9);
 
-  // BigInt<8> x(a);
-  // BigInt<8> y(b);
-  // BigInt<8> z(c);
+  // BigInt<2> x();
+  // BigInt<2> y();
+  // BigInt<2> z();
   // std::cout << a << std::endl;
   // std::cout << x << std::endl;
   // std::cout << "\n";
