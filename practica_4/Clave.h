@@ -1,17 +1,3 @@
-/**
-  * Universidad de La Laguna
-  * Escuela Superior de Ingeniería y Tecnología
-  * Grado en Ingeniería Informática
-  * Algoritmo y Estructura de Datos Avanzado
-  *
-  * @file Clave.h
-  * @author Jose Dorta Luis alu0101414676@ull.edu.es
-  * @date 29 March 2022.
-  * @brief fichero de cabezera que contiene la declaración de la clase Clave.
-  * @bug ningún bug conocido.
-  * 
-  */
-
 #ifndef CLAVE_H
 #define CLAVE_H
 
