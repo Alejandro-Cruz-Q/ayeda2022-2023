@@ -139,46 +139,46 @@ void Shell_Sort(std::vector<Key>& data, unsigned size){
   Print(data, size);
 }
 
-template<class Key>
-void merge(std::vector<Key>& vec, unsigned left, unsigned mid, unsigned right){
-  std::vector<Key> temp(right - left);
-  // Indices
-  unsigned i = left;
-  unsigned j = mid;
-  unsigned k = 0;
-  // ordenacion de las mitades
-  while(i < mid && j < right){
-    if(vec[i] < vec[j]) {
-      temp[k++] = vec[i++];
-    } else{
-        temp[k++] = vec[j++];
+template <class Key>
+void merge(std::vector<Key>& seq, int ini, int mid, int fin){
+  std::vector<Key> aux = seq;
+  int i = ini, j = mid+1, k = ini;
+  while(( i <= mid ) && ( j <= fin )){
+    if(seq.at(i) < seq.at(j)){
+      aux.at(k) = seq.at(i);
+      i++;
+    } else {
+      aux.at(k) = seq.at(j);
+      j++;
+    }
+    k++;
+  } 
+  if(i > mid){
+    while( j <= fin ){
+      aux.at(k) = seq.at(j);
+      j++; 
+      k++;
+    }
+  } else {
+    while( i <= mid ){
+      aux.at(k) = seq.at(i);
+      i++; 
+      k++;
     }
   }
-  //elementos residuales
-  while(i < mid){
-    temp[k++] = vec[i++];
-  }
-  while(j < right){
-    temp[k++] = vec[j++];
-  }
-  // Copia de los elementos ordenados al vector original
-  for(unsigned i = left, k = 0; i < right; i++, k++){
-    vec[i] = temp[k];
+  for(int k = ini; k <= fin; k++){
+    seq.at(k) = aux.at(k);
   }
 }
 
-template<class Key>
-void Merge_Sort(std::vector<Key>& vec, unsigned size){
-      if (size > 1) {
-        unsigned mid = size / 2;
-        // Mitad izquierda del vector
-        Merge_Sort(vec, mid);
-        // Mitad derecha del vector
-        Merge_Sort(vec, size - mid);
-        // Mezcla
-        merge(vec, 0, mid, size -1);
-        Print(vec, size);
-    }
+template <class Key>
+void Merge_Sort(std::vector<Key>& seq, int ini, int fin){
+  if( ini < fin ){
+    int mid = (ini + fin)/2;
+    Merge_Sort(seq, ini, mid);
+    Merge_Sort(seq, mid+1, fin);
+    merge(seq, ini, mid, fin);
+  }
 }
 
 template<class Key>

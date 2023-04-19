@@ -26,7 +26,13 @@ class MergeSort : public SortMethod<Key>{
 
 template<class Key>
 void MergeSort<Key>::Sort(std::vector<Key> vec, unsigned size){
-  Merge_Sort(vec, size);
+  for(int i = 1; i < size; i++){
+    Merge_Sort(vec, 0, size -1);
+    for(int i = 0; i < size; i++){
+      std::cout << vec[i] << " ";
+    }
+    std::cout << "\n";
+  }
 }
 
 #endif // MERGESORT_H
