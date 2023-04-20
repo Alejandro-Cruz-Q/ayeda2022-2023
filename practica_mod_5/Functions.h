@@ -16,7 +16,7 @@ void Floyd(std::vector<Key>& data, int i, int n) {
   // Se van intercambiando los valores hasta que se llega a una hoja del árbol
   while ((2 * i) < n) {
     int aux1 = (2 * i + 1);
-    int aux2 = aux1 + 1;
+    int aux2 = (2 * i + 2);
     // Se selecciona el mayor de los dos hijos
     if (aux1 == n) {
       aux = aux1;
@@ -57,7 +57,7 @@ void Heap_Sort(std::vector<Key>& data, unsigned sizeN){
     Floyd(data, 0, i - 1);
   }
   // Para ver la traza
-  Print(data, size);
+  //Print(data, size);
 }
 
 template<class Key>
@@ -95,12 +95,12 @@ void Radix_Sort(std::vector<Key>& data, unsigned size) {
   int exp = 1;
   while ((max / exp) > 0) {
     // Para ver la traza
-    Print(data, size);
+    //Print(data, size);
     CountingSort(data, size, exp); // Llamada a CountingSort para ordenar los datos según la posición de los dígitos
     exp *= 10;
   }
   // Para ver la traza
-  Print(data, size);
+  //Print(data, size);
 }
 
 template<class Key>
@@ -108,7 +108,7 @@ void deltasort(std::vector<Key>& data, int delta, int size) {
   bool flag;
   Key x;
   int j{0};
-  Print(data, size);
+  //Print(data, size);
   for (int i{delta}; i < size; i++) {
     flag = false;
     x = data[i];
@@ -117,11 +117,11 @@ void deltasort(std::vector<Key>& data, int delta, int size) {
       data[j] = data[j - delta];  // Se mueve el elemento a la posición actual
       j = j - delta;  // Se actualiza el valor del índice j
       flag = true;
-      Print(data, size);
+      //Print(data, size);
     }
     if (flag) {  // Si se ha producido algún intercambio, se inserta el valor
       data[j] = x;
-      Print(data, size);
+      //Print(data, size);
     }
   }
 }
@@ -136,7 +136,7 @@ void Shell_Sort(std::vector<Key>& data, unsigned size){
     delta = delta / 2;  // Se reduce el valor de delta a la mitad en cada iteración
     deltasort(data, delta, size);
   }
-  Print(data, size);
+  //Print(data, size);
 }
 
 template <class Key>
@@ -173,10 +173,6 @@ void merge(std::vector<Key>& seq, int ini, int mid, int fin){
 
 template <class Key>
 void Merge_Sort(std::vector<Key>& seq, int ini, int fin){
-    for(int i = 0; i < fin; i++){
-      std::cout << seq[i] << " ";
-    }
-    std::cout << "\n";
   if( ini < fin ){
     int mid = (ini + fin)/2;
     Merge_Sort(seq, ini, mid);
@@ -195,6 +191,6 @@ void Insertion_Sort(std::vector<Key>& data, unsigned size){
       j--;
       }
     data[j + 1] = key; // colocamos el elemento en su posición correcta
-    Print(data, size);
+    //Print(data, size);
   }
 }

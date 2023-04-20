@@ -1,5 +1,5 @@
 /**
- * @file MergeSort.h
+ * @file ShellSort.h
  * @author Alejandro Miguel Cruz Quiralte (Alu0101424545@ull.edu.es)
  * @brief Este algoritmo consiste en almacenar todos los elementos del vector a
  * Sort en un montículo (heap), y luego extraer el nodo que queda como nodo
@@ -12,27 +12,22 @@
  *
  */
 
-#ifndef MERGESORT_H
-#define MERGESORT_H
+#ifndef SHELLSORT_H_ 
+#define SHELLSORT_H_
 
 #include "SortMethod.h"
 
 template<class Key>
-class MergeSort : public SortMethod<Key>{
+class ShellSort : public SortMethod<Key> {
   public:
-    void Sort(std::vector<Key>, unsigned size);
+    void Sort(std::vector<Key>, unsigned);
   private:
+    float alfa_;
 };
 
 template<class Key>
-void MergeSort<Key>::Sort(std::vector<Key> vec, unsigned size){
-  //for(int i = 1; i < size; i++){
-    Merge_Sort(vec, 0, size -1);
-    for(int i = 0; i < size; i++){
-      std::cout << vec[i] << " ";
-    }
-    std::cout << "\n";
-  }
-//}
+void ShellSort<Key>::Sort(std::vector<Key> vec, unsigned size){
+  Shell_Sort(vec, size);
+}
 
-#endif // MERGESORT_H
+#endif // SHELLSORT_H_
